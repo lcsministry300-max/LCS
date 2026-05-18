@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lucban Christian School — Official Website</title>
+  <meta name="description" content="Lucban Christian School, Inc. (LCS) — A Christ-centered K–JHS institution in Lucban, Quezon, Philippines. Established 1993.">
+
+  <!-- ═══ OPEN GRAPH / FACEBOOK LINK PREVIEW ═══ -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://andoyheb-cmd.github.io/LCS-WEBSITE/">
+  <meta property="og:title" content="Lucban Christian School — Official Website">
+  <meta property="og:description" content="Lucban Christian School, Inc. (LCS) — A Christ-centered K–JHS institution in Lucban, Quezon, Philippines. Established 1993.">
+  <meta property="og:image" content="https://andoyheb-cmd.github.io/LCS-WEBSITE/building.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
+  <meta property="og:image:alt" content="Lucban Christian School Building">
+  <meta property="og:site_name" content="Lucban Christian School">
+
+  <!-- ═══ PRECONNECTS (warm up external connections early) ═══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.gstatic.com">
+  <link rel="preconnect" href="https://firestore.googleapis.com">
+
+  <!-- ═══ PRELOAD hero image (above the fold, load ASAP) ═══ -->
+  <link rel="preload" as="image" href="building.jpg">
+
+  <!-- ═══ NON-BLOCKING FONTS (trimmed to only used weights) ═══ -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Raleway:wght@400;600;700&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Raleway:wght@400;600;700&display=swap">
+  </noscript>
+
+  <!-- ═══ STYLESHEET ═══ -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════════════════════ -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-brand">
+    <div class="nav-logo">
+      <img src="logo.png" alt="Lucban Christian School Logo" width="60" height="60">
+    </div>
+    <div class="nav-name">
+      Lucban Christian School
+      <span>Lucban, Quezon, Philippines</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#profile">School Profile</a></li>
+      <li><a href="#why-lcs">Why LCS?</a></li>
+      <li><a href="#programs">Course Offerings</a></li>
+      <li><a href="#events">Events &amp; News</a></li>
+      <li><a href="#contact">Contact &amp; Inquiry</a></li>
+    </ul>
+    <div class="nav-jhs-logo">
+      <img src="lcs-jhs.png" alt="LCS Junior High School" width="60" height="60" loading="lazy">
+    </div>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile overlay -->
+<div class="nav-overlay" id="nav-overlay"></div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-building">
+    <!-- No lazy load — this is above the fold -->
+    <img src="building.jpg" alt="Lucban Christian School Building" width="1200" height="600">
+  </div>
+  <svg class="hero-cross" width="340" height="480" viewBox="0 0 340 480" fill="none">
+    <rect x="140" y="0" width="60" height="480" fill="white"/>
+    <rect x="0" y="160" width="340" height="60" fill="white"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Established 1993 · Lucban, Quezon, Philippines</div>
+    <h1 class="hero-title">Nurturing <em>Faith,</em><br>Character &amp; Excellence</h1>
+    <p class="hero-subtitle">
+      Training Today for Tomorrow's Godly Leaders. A Christ-centered, non-stock,
+      non-profit church mission school of the Reformed Church in the Philippines.
+    </p>
+    <div class="hero-banner-img">
+      <img src="banner.png" alt="Your CHILD Road to SUCCESS begin at LCS!" width="600" height="60" loading="lazy">
+      <img src="border.png" alt="" class="hero-border-img" width="800" height="40" loading="lazy" aria-hidden="true">
+    </div>
+    <div class="hero-actions">
+      <a href="#programs" class="btn-outline">
+        <svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+        Course Offerings
+      </a>
+      <a href="#contact" class="btn-outline">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Contact Us
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">1993</div>
+      <div class="stat-label">Year Founded</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Programs Offered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">DepEd</div>
+      <div class="stat-label">Recognized</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     SCHOOL PROFILE
+══════════════════════════════════════════════════════════ -->
+<section id="profile">
+  <div class="about-text reveal">
+    <div class="section-label">Background</div>
+    <h2 class="section-title">School Profile</h2>
+    <p>Lucban Christian School, Inc. (LCS) is a non-stock, non-profit church mission school of the Reformed Church in the Philippines (RCPI) – Lucban Christian Reformed Church. The school is committed to developing the moral, physical, intellectual, and spiritual life of every child. LCS believes that each child possesses God-given gifts that must be nurtured and trained according to Biblical principles.</p>
+    <p>Established in 1993 in response to the growing demand for quality and affordable Christian education, LCS initially offered Preschool education. Elementary education was added in 1995, and Junior High School in 2016, made possible through the leadership of Rev. Dong Won Lu and the financial support of The Kyungnam Layman's Association (KLA).</p>
+    <p>LCS is duly recognized by the Department of Education under Government Recognition Nos. K-18, E-18 s. 2003, and S-007 s. 2019 for Preschool, Elementary, and Junior High School, respectively.</p>
+    <p>Beginning SY 2024–2025, LCS is officially certified as a PEAC-participating school and recognized as a grantee under the Expanded Government Assistance to Teachers and Students in Private Education (E-GASTPE) through the Education Service Contracting (ESC) Program.</p>
+    <div class="profile-btns">
+      <a href="#contact" class="btn-outline btn-sm">Ask a Question</a>
+    </div>
+  </div>
+
+  <div class="about-visual reveal">
+    <div class="about-card">
+      <div class="about-verse">"Train up a child in the way he should go: and when he is old, he will not depart from it."</div>
+      <div class="about-ref">— Proverbs 22:6</div>
+    </div>
+    <div class="about-meta">
+      <div class="meta-item reveal">
+        <div class="meta-label">Philosophy</div>
+        <div class="meta-value">"Training Today for Tomorrow's Godly Leaders"</div>
+      </div>
+      <div class="meta-item reveal">
+        <div class="meta-label">Affiliation</div>
+        <div class="meta-value">Reformed Church in the Philippines (RCPI)</div>
+      </div>
+      <div class="meta-item reveal">
+        <div class="meta-label">DepEd Recognition</div>
+        <div class="meta-value">K-18, E-18 s. 2003 &amp; S-007 s. 2019</div>
+      </div>
+      <div class="meta-item reveal">
+        <div class="meta-label">PEAC / E-GASTPE</div>
+        <div class="meta-value">Certified Grantee — SY 2026-2030</div>
+      </div>
+    </div>
+    <div class="about-accent-box"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     WHY ENROLL AT LCS
+══════════════════════════════════════════════════════════ -->
+<section id="why-lcs">
+  <div class="why-header reveal">
+    <div class="section-label">Reasons to Choose LCS</div>
+    <h2 class="section-title">Why Enroll at LCS?</h2>
+    <p class="why-intro">
+      Choosing the right school shapes not only your child's future — but also their character, faith, and purpose.
+      At Lucban Christian School, Inc., education goes beyond academics — it is a mission.
+    </p>
+  </div>
+
+  <!-- ESC Subsidy Banner -->
+  <div class="why-esc-banner reveal">
+    <div class="esc-badge">ESC Subsidy</div>
+    <div class="esc-text">
+      <strong>Junior High School students receive <span class="esc-amount">₱9,000.00</span> ESC subsidy</strong>
+      — plus an additional <span class="esc-bonus">₱1,000.00</span> support for <em>new enrollees!</em>
+    </div>
+    <a href="#contact" class="btn-esc">Enroll Now →</a>
+  </div>
+
+  <!-- 10 Reasons Grid -->
+  <div class="why-grid">
+
+    <div class="why-card reveal">
+      <div class="why-num">01</div>
+      <div class="why-icon">✝️</div>
+      <h3 class="why-title">Christ-Centered Education</h3>
+      <p class="why-desc">Grounded in Biblical principles — integrating Christian values in all subjects, with regular devotion, prayer, and spiritual activities that form Christ-like character.</p>
+    </div>
+
+    <div class="why-card reveal">
+      <div class="why-num">02</div>
+      <div class="why-icon">📖</div>
+      <h3 class="why-title">Academic Excellence with Purpose</h3>
+      <p class="why-desc">A complete academic program from Preschool to Junior High School that develops critical thinking, communication skills, and academic mastery for lifelong success.</p>
+    </div>
+
+    <div class="why-card reveal">
+      <div class="why-num">03</div>
+      <div class="why-icon">🏛️</div>
+      <h3 class="why-title">Complete Learning Facilities</h3>
+      <p class="why-desc">Library, TLE Room, Science Lab, Computer Laboratory, School Canteen, and a Clinic — all providing a conducive environment for holistic development.</p>
+    </div>
+
+    <div class="why-card reveal">
+      <div class="why-num">04</div>
+      <div class="why-icon">👩‍🏫</div>
+      <h3 class="why-title">Dedicated &amp; Caring Teachers</h3>
+      <p class="why-desc">Qualified and experienced educators who provide personal attention to learners, serving as mentors and role models that shape responsible and confident individuals.</p>
+    </div>
+
+    <div class="why-card reveal">
+      <div class="why-num">05</div>
+      <div class="why-icon">🌱</div>
+      <h3 class="why-title">Holistic Child Development</h3>
+      <p class="why-desc">LCS focuses on the total growth of every child — spiritual, moral, intellectual, and physical — developing well-rounded, disciplined, and values-driven students.</p>
+    </div>
+
+    <div class="why-card reveal">
+      <div class="why-num">06</div>
+      <div class="why-icon">🏠</div>
+      <h3 class="why-title">Safe &amp; Supportive Environment</h3>
+      <p class="why-desc">A family-like atmosphere where students feel safe and respected, positive discipline is practiced, and parents are active partners in their child's growth.</p>
+    </div>
+
+    <div class="why-card reveal">
+      <div class="why-num">07</div>
+      <div class="why-icon">🌟</div>
+      <h3 class="why-title">Formation of Future Godly Leaders</h3>
+      <p class="why-desc">"Training Today for Tomorrow's Godly Leaders" — students are prepared to lead with integrity, serve others, and make a positive impact in society.</p>
+    </div>
+
+    <div class="why-card reveal">
+      <div class="why-num">08</div>
+      <div class="why-icon">💰</div>
+      <h3 class="why-title">Affordable Quality Christian Education</h3>
+      <p class="why-desc">ESC subsidy for Junior High School students, additional support for new enrollees, and quality education at a reasonable cost — accessible for Filipino families.</p>
+    </div>
+
+    <div class="why-card reveal">
+      <div class="why-num">09</div>
+      <div class="why-icon">🏆</div>
+      <h3 class="why-title">Recognized &amp; Trusted Institution</h3>
+      <p class="why-desc">DepEd-recognized and recently PEAC Certified (SY 2026–2030) — a mark of quality, credibility, and excellence in Christian education.</p>
+    </div>
+
+    <div class="why-card reveal">
+      <div class="why-num">10</div>
+      <div class="why-icon">🎖️</div>
+      <h3 class="why-title">Enriching Student Programs</h3>
+      <p class="why-desc">Academic and leadership activities, school events, competitions, and community outreach programs help students discover their God-given talents and build confidence.</p>
+    </div>
+
+  </div>
+
+  <div class="why-cta reveal">
+    <p>At LCS, your child is not just educated — <em>they are prepared for life and eternity.</em></p>
+    <a href="#contact" class="btn-primary">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      Inquire &amp; Enroll Now
+    </a>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     COURSE OFFERINGS
+══════════════════════════════════════════════════════════ -->
+<section id="programs">
+  <div class="programs-header">
+    <div class="reveal">
+      <div class="section-label">What We Offer</div>
+      <h2 class="section-title">Course Offerings</h2>
+      <p class="programs-intro">
+        LCS provides a Christ-centered educational journey from Nursery through Junior High School, nurturing every child spiritually, academically, and morally.
+      </p>
+    </div>
+  </div>
+
+  <div class="programs-grid">
+
+    <div class="program-card reveal" data-program="nursery">
+      <div class="program-badge">Pre-School</div>
+      <div class="program-icon">🌱</div>
+      <div class="program-name">Nursery</div>
+      <p class="program-desc">A gentle introduction to structured learning through play, storytelling, and early faith formation in a warm, loving environment.</p>
+      <div class="program-grade">Age 3–4</div>
+      <div class="program-actions">
+        <button class="btn-program-detail" onclick="openProgramModal('nursery')">View Details</button>
+      </div>
+    </div>
+
+    <div class="program-card reveal" data-program="kinder1">
+      <div class="program-badge">Pre-School</div>
+      <div class="program-icon">📚</div>
+      <div class="program-name">Kinder 1</div>
+      <p class="program-desc">Building foundational literacy, numeracy, and social skills through engaging activities rooted in Christian values.</p>
+      <div class="program-grade">Age 4–5</div>
+      <div class="program-actions">
+        <button class="btn-program-detail" onclick="openProgramModal('kinder1')">View Details</button>
+      </div>
+    </div>
+
+    <div class="program-card reveal" data-program="kinder2">
+      <div class="program-badge">Pre-School</div>
+      <div class="program-icon">✏️</div>
+      <div class="program-name">Kinder 2</div>
+      <p class="program-desc">Preparing young learners for formal schooling with confidence, curiosity, and a growing love for God and learning.</p>
+      <div class="program-grade">Age 5–6</div>
+      <div class="program-actions">
+        <button class="btn-program-detail" onclick="openProgramModal('kinder2')">View Details</button>
+      </div>
+    </div>
+
+    <div class="program-card reveal" data-program="elementary">
+      <div class="program-badge">Primary</div>
+      <div class="program-icon">🏫</div>
+      <div class="program-name">Elementary School</div>
+      <p class="program-desc">Core academics integrated with Christian values, developing strong readers, critical thinkers, and servants of God. Offered since 1995.</p>
+      <div class="program-grade">Grade 1 – Grade 6</div>
+      <div class="program-actions">
+        <button class="btn-program-detail" onclick="openProgramModal('elementary')">View Details</button>
+      </div>
+    </div>
+
+    <div class="program-card reveal" data-program="jhs">
+      <div class="program-badge">Secondary</div>
+      <div class="program-icon">🎓</div>
+      <div class="program-name">Junior High School</div>
+      <p class="program-desc">A transformative period of academic growth and character formation. Established in 2016 through the support of the Kyungnam Layman's Association.</p>
+      <div class="program-grade">Grade 7 – Grade 10</div>
+      <div class="program-actions">
+        <button class="btn-program-detail" onclick="openProgramModal('jhs')">View Details</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     EVENTS & NEWS
+══════════════════════════════════════════════════════════ -->
+<section id="events">
+  <div class="events-header">
+    <div class="reveal">
+      <div class="section-label">School Life</div>
+      <h2 class="section-title">Events &amp; News</h2>
+      <p class="events-intro">Stay informed about school activities, celebrations, and community announcements from Lucban Christian School.</p>
+    </div>
+    <div class="events-header-action reveal">
+      <a href="https://www.facebook.com/lcsvision300" target="_blank" rel="noopener noreferrer" class="btn-outline btn-sm events-fb-btn">
+        <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12z"/></svg>
+        Follow on Facebook
+      </a>
+    </div>
+  </div>
+
+  <div class="events-slideshow">
+    <div class="events-track" id="events-track">
+
+      <div class="eslide">
+        <div class="eslide-img event-placeholder-1">
+          <span>🎉</span>
+          <div class="event-badge">Latest</div>
+        </div>
+        <div class="eslide-body">
+          <div class="event-meta">
+            <span class="event-date">July 4, 2016</span>
+            <span class="event-tag">School Event</span>
+          </div>
+          <h3 class="event-title">Nutrition Month Parade</h3>
+          <p class="event-excerpt">LCS preschool and elementary pupils, parents, and teachers joined the Lucban Nutrition Month parade — wearing creative Pinggang Pinoy headgear showcasing Go, Grow, and Glow foods. Praise be to God for the successful celebration!</p>
+          <a href="https://web.facebook.com/lcsvision/" target="_blank" rel="noopener noreferrer" class="event-readmore">
+            Read more <svg viewBox="0 0 24 24" width="16" height="16"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="eslide">
+        <div class="eslide-img event-placeholder-2"><span>🎓</span></div>
+        <div class="eslide-body">
+          <div class="event-meta">
+            <span class="event-date">Upcoming</span>
+            <span class="event-tag">Recognition</span>
+          </div>
+          <h3 class="event-title">Recognition Day &amp; Graduation</h3>
+          <p class="event-excerpt">An annual ceremony honoring our graduates and academic achievers across all grade levels — celebrating God's faithfulness in every student's journey.</p>
+          <a href="#contact" class="event-readmore">Inquire about this event <svg viewBox="0 0 24 24" width="16" height="16"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="eslide">
+        <div class="eslide-img event-placeholder-3"><span>🙏</span></div>
+        <div class="eslide-body">
+          <div class="event-meta">
+            <span class="event-date">Every Week</span>
+            <span class="event-tag">Spiritual</span>
+          </div>
+          <h3 class="event-title">Weekly Chapel Service</h3>
+          <p class="event-excerpt">Students and teachers gather every week to worship, hear God's Word, and grow together in faith as one school community under Christ's lordship.</p>
+          <a href="#contact" class="event-readmore">Learn more <svg viewBox="0 0 24 24" width="16" height="16"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="eslide">
+        <div class="eslide-img event-placeholder-4"><span>🏆</span></div>
+        <div class="eslide-body">
+          <div class="event-meta">
+            <span class="event-date">Annual</span>
+            <span class="event-tag">Competition</span>
+          </div>
+          <h3 class="event-title">Academic &amp; Leadership Competitions</h3>
+          <p class="event-excerpt">LCS students regularly participate in inter-school quiz bees, science fairs, oratorical contests, and leadership summits — shining as lights in Quezon Province.</p>
+          <a href="#contact" class="event-readmore">Get updates <svg viewBox="0 0 24 24" width="16" height="16"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="events-controls">
+    <div class="eslide-dots" id="eslide-dots"></div>
+    <span class="eslide-counter" id="eslide-counter">1 / 4</span>
+    <div class="eslide-arrows">
+      <button class="eslide-arr" id="eslide-prev" aria-label="Previous slide">
+        <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/></svg>
+      </button>
+      <button class="eslide-arr" id="eslide-next" aria-label="Next slide">
+        <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     NEWSLETTER
+══════════════════════════════════════════════════════════ -->
+<div class="newsletter-bar" id="newsletter">
+  <div class="newsletter-inner">
+    <div class="newsletter-text reveal">
+      <div class="newsletter-icon">✉️</div>
+      <div>
+        <h3 class="newsletter-title">Get School Updates</h3>
+        <p class="newsletter-sub">Subscribe to receive announcements, event invites, and school news from LCS directly in your inbox.</p>
+      </div>
+    </div>
+    <form class="newsletter-form reveal" id="nl-form" onsubmit="submitNewsletter(event)" novalidate>
+      <div class="nl-input-wrap">
+        <input type="email" id="nl-email" class="nl-input" placeholder="Enter your email address" required autocomplete="email">
+        <button type="submit" class="nl-btn" id="nl-btn">
+          Subscribe
+          <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </div>
+      <p class="nl-note">No spam. Unsubscribe anytime.</p>
+      <p class="nl-success" id="nl-success" style="display:none;">
+        ✅ You're subscribed! Thank you for staying connected with LCS.
+      </p>
+    </form>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     CONTACT & INQUIRY
+══════════════════════════════════════════════════════════ -->
+<section id="contact">
+
+  <div class="contact-inquiry-top">
+    <div class="contact-inquiry-header reveal">
+      <div class="section-label">We're Here to Help</div>
+      <h2 class="section-title">Submit an Inquiry</h2>
+      <p class="inquiry-intro">Have questions about enrollment, tuition, programs, or school events? Fill out the form below and our team will respond within 1–2 business days.</p>
+    </div>
+
+    <div class="inquiry-body">
+      <!-- Category tabs -->
+      <div class="inquiry-cats reveal">
+        <button class="cat-btn active" data-cat="tuition">
+          <svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.3-.6-3-1.2-3-2.2 0-1.1 1-1.9 2.8-1.9 1.9 0 2.6.9 2.7 2.3H16c-.1-1.9-1.2-3.6-3.5-4.1V3h-3v1.9C7.2 5.4 5.5 6.9 5.5 8.7c0 2.1 1.7 3.2 4.3 3.9 2.5.6 3 1.5 3 2.4 0 .7-.5 1.8-2.8 1.8-2.1 0-3-.9-3.1-2.3H4.5c.1 2.4 1.9 3.8 4 4.3V21h3v-2c2.3-.5 4.1-1.9 4.1-4.1-.1-2.8-2.3-3.8-4.8-4z"/></svg>
+          Tuition &amp; Fees
+        </button>
+        <button class="cat-btn" data-cat="academics">
+          <svg viewBox="0 0 24 24"><path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/></svg>
+          Academics
+        </button>
+        <button class="cat-btn" data-cat="scholarship">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.4-1.4L12 14.2l7.6-7.6L21 8l-9 9z"/></svg>
+          Scholarships
+        </button>
+        <button class="cat-btn" data-cat="other">
+          <svg viewBox="0 0 24 24"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg>
+          Other
+        </button>
+      </div>
+
+      <!-- Form -->
+      <div class="inquiry-form reveal">
+        <div class="iform-row">
+          <div class="iform-group">
+            <label for="iq-firstname">First Name <span class="req">*</span></label>
+            <input id="iq-firstname" type="text" placeholder="Juan">
+          </div>
+          <div class="iform-group">
+            <label for="iq-lastname">Last Name <span class="req">*</span></label>
+            <input id="iq-lastname" type="text" placeholder="Dela Cruz">
+          </div>
+        </div>
+        <div class="iform-row">
+          <div class="iform-group">
+            <label for="iq-email">Email Address <span class="req">*</span></label>
+            <input id="iq-email" type="email" placeholder="you@email.com">
+          </div>
+          <div class="iform-group">
+            <label for="iq-phone">Phone / Mobile</label>
+            <input id="iq-phone" type="tel" placeholder="+63 9XX XXX XXXX" inputmode="numeric" maxlength="15" pattern="[\d\+\-\s\(\)]{7,15}" title="Enter a valid phone number (digits, +, -, spaces only)">
+          </div>
+        </div>
+        <div class="iform-row">
+          <div class="iform-group">
+            <label for="iq-relation">Your Relation to Student</label>
+            <select id="iq-relation">
+              <option value="">— Select —</option>
+              <option>Parent / Guardian</option>
+              <option>Prospective Student</option>
+              <option>Alumni</option>
+              <option>Community Member</option>
+              <option>Organization / Partner</option>
+            </select>
+          </div>
+          <div class="iform-group">
+            <label for="iq-level">Grade / Level of Interest</label>
+            <select id="iq-level">
+              <option value="">— Select —</option>
+              <option>Nursery (Age 3–4)</option>
+              <option>Kinder 1 (Age 4–5)</option>
+              <option>Kinder 2 (Age 5–6)</option>
+              <option>Elementary (Grade 1–6)</option>
+              <option>Junior High School (Grade 7–10)</option>
+              <option>Not Applicable</option>
+            </select>
+          </div>
+        </div>
+        <div class="iform-group">
+          <label for="iq-subject">Subject / Topic <span class="req">*</span></label>
+          <input id="iq-subject" type="text" placeholder="e.g. SY 2025–2026 Enrollment Requirements">
+        </div>
+        <div class="iform-group">
+          <label for="iq-message">Your Message <span class="req">*</span></label>
+          <textarea id="iq-message" rows="5" placeholder="Please describe your inquiry in as much detail as possible so we can assist you better."></textarea>
+        </div>
+        <div class="iform-footer">
+          <p class="iform-note">Fields marked <span class="req">*</span> are required. We respond within 1–2 business days.</p>
+          <button class="btn-primary iform-submit" id="iq-submit">
+            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            Submit Inquiry
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Divider -->
+  <div class="contact-divider reveal"><span>Contact Information</span></div>
+
+  <!-- Contact Info Grid -->
+  <div class="contact-info-grid">
+    <div class="contact-item reveal">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">Address</div>
+        <div class="contact-value">
+          <a href="https://maps.google.com/?q=Lucban+Christian+School+Inc+Lucban+Quezon" target="_blank" style="color: inherit; text-decoration: underline;">
+            Lucban Christian School, Inc.<br>
+            Lucban-Sampaloc Rd. Brgy. Abang<br>
+            Lucban, Quezon 4328, Philippines
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-item reveal">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">Phone / Mobile</div>
+        <div class="contact-value">
+          <a href="tel:+63425403113">+63 42 540 3113</a><br>
+          <a href="tel:09399385318">09399385318</a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-item reveal">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value"><a href="mailto:lcs.ministry300@gmail.com">lcs.ministry300@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="contact-item reveal">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">Office Hours</div>
+        <div class="contact-value">Monday – Friday<br>7:30 AM – 5:00 PM</div>
+      </div>
+    </div>
+    <div class="contact-item reveal">
+      <div class="contact-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12z"/></svg>
+      </div>
+      <div>
+        <div class="contact-label">Facebook</div>
+        <div class="contact-value"><a href="https://www.facebook.com/lcsvision300" target="_blank" rel="noopener noreferrer">Lucban Christian School</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-logos">
+    <div class="footer-logos-label">Affiliations &amp; Recognitions</div>
+    <div class="footer-logos-row">
+      <div class="footer-logo-item">
+        <img src="deped.jpg" alt="Department of Education" width="80" height="80" loading="lazy">
+        <span>DepEd</span>
+      </div>
+      <div class="footer-logo-item">
+        <img src="deped-quezon.jpg" alt="DepEd Quezon" width="80" height="80" loading="lazy">
+        <span>DepEd Quezon</span>
+      </div>
+      <div class="footer-logo-item">
+        <img src="peac.jpg" alt="PEAC" width="80" height="80" loading="lazy">
+        <span>PEAC</span>
+      </div>
+      <div class="footer-logo-item">
+        <img src="rcpi.jpg" alt="Lucban Christian Reformed Church – RCPI" width="80" height="80" loading="lazy">
+        <span>RCPI</span>
+      </div>
+      <div class="footer-logo-item">
+        <img src="ixthus.jpg" alt="IXΘUS" width="80" height="80" loading="lazy">
+        <span>IXΘUS</span>
+      </div>
+      <div class="footer-logo-item">
+        <img src="lcs-jhs.png" alt="LCS Junior High School" width="80" height="80" loading="lazy">
+        <span>LCS – JHS</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-nav">
+    <a href="#profile">School Profile</a>
+    <a href="#programs">Course Offerings</a>
+    <a href="#contact">Contact &amp; Inquiry</a>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-brand">
+      Lucban Christian School, Inc.
+      <span>Lucban-Sampaloc Rd. Brgy. Abang, Lucban, Quezon 4328, Philippines</span>
+    </div>
+    <div class="footer-verse">"Training Today for Tomorrow's Godly Leaders"</div>
+    <div class="footer-copy">© 2025 Lucban Christian School. All rights reserved.</div>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     PROGRAM DETAIL MODAL
+══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="program-modal-overlay">
+  <div class="modal-box" id="program-modal">
+    <button class="modal-close-btn" id="program-modal-close">
+      <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+    <div id="program-modal-content"></div>
+  </div>
+</div>
+
+
+<!-- Back to top -->
+<button class="back-to-top" id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+</button>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     SCRIPTS — all deferred so they never block rendering
+     Load order is guaranteed: app → firestore → init → main
+══════════════════════════════════════════════════════════ -->
+<script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script defer src="firebase-init.js"></script>
+<script defer src="main.js"></script>
+
+</body>
+</html>

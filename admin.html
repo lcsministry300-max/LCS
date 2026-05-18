@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCS Admin — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Raleway:wght@300;400;500;600;700&family=Crimson+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     LOGIN SCREEN
+══════════════════════════════════════════════════════════ -->
+<div id="login-screen">
+  <svg class="login-cross" width="260" height="380" viewBox="0 0 260 380" fill="none">
+    <rect x="108" y="0"   width="44" height="380" fill="white"/>
+    <rect x="0"   y="124" width="260" height="44"  fill="white"/>
+  </svg>
+
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="logo.png" alt="LCS Logo">
+    </div>
+    <div class="login-title">Admin Dashboard</div>
+    <div class="login-sub">Lucban Christian School</div>
+
+    <div class="login-group">
+      <label for="admin-pass">Password</label>
+      <input id="admin-pass" type="password" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <div class="login-error" id="login-error">Incorrect password. Please try again.</div>
+    <button class="login-btn" id="login-btn">Sign In</button>
+
+    <p class="login-note">
+      This portal is for LCS administrators only.<br>
+      Change the password in admin.html before deploying.
+    </p>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════
+     DASHBOARD
+══════════════════════════════════════════════════════════ -->
+<div id="dashboard">
+
+  <div class="topbar">
+    <div class="topbar-brand">
+      <div class="topbar-logo"><img src="logo.png" alt="LCS Logo"></div>
+      <div class="topbar-name">
+        LCS Admin
+        <span>Dashboard</span>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-admin">Signed in as <strong>Administrator</strong></div>
+
+      <!-- ── NEW: Dark mode toggle ── -->
+      <button class="dark-toggle-btn" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <!-- Sun icon (shown in dark mode) -->
+        <svg id="icon-sun" viewBox="0 0 24 24" style="display:none"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-12.37l-1.06 1.06a.996.996 0 000 1.41c.39.39 1.03.39 1.41 0l1.06-1.06a.996.996 0 000-1.41-.99-.99-1.41 0zM7.05 18.36l-1.06 1.06a.996.996 0 000 1.41c.39.39 1.03.39 1.41 0l1.06-1.06a.996.996 0 000-1.41-.99-.99-1.41 0z"/></svg>
+        <!-- Moon icon (shown in light mode) -->
+        <svg id="icon-moon" viewBox="0 0 24 24"><path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-3.14-9.8c-.44-.06-.9-.1-1.36-.1z"/></svg>
+      </button>
+
+      <button class="logout-btn" id="logout-btn">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="dash-main">
+
+    <!-- Firebase setup notice -->
+    <div class="setup-notice" id="setup-notice" style="display:none">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+      <div class="setup-notice-text">
+        <strong>Firebase not configured yet.</strong> Open <code>admin.html</code> and <code>index.html</code>,
+        replace the <code>firebaseConfig</code> values with your own from the
+        <a href="https://console.firebase.google.com" target="_blank">Firebase Console</a>.
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row" id="stats-row">
+      <div class="stat-card">
+        <div class="stat-card-num" id="stat-total">—</div>
+        <div class="stat-card-label">Total Inquiries</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-num" id="stat-new">—</div>
+        <div class="stat-card-label">Unread</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-num" id="stat-tuition">—</div>
+        <div class="stat-card-label">Tuition &amp; Fees</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-num" id="stat-today">—</div>
+        <div class="stat-card-label">Today</div>
+      </div>
+      <div class="stat-card stat-card-subscribers">
+        <div class="stat-card-num" id="stat-subscribers">—</div>
+        <div class="stat-card-label">Newsletter Subscribers</div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE TABS ══ -->
+    <div class="page-tabs" id="page-tabs">
+      <button class="page-tab active" data-tab="inquiries">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        Inquiries
+        <span class="tab-count" id="tab-count-inquiries">—</span>
+      </button>
+      <button class="page-tab" data-tab="subscribers">
+        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        Newsletter Subscribers
+        <span class="tab-count" id="tab-count-subscribers">—</span>
+      </button>
+    </div>
+
+    <!-- ══ INQUIRIES PANEL ══ -->
+    <div id="panel-inquiries">
+
+    <!-- ── NEW: Analytics Chart ── -->
+    <div class="chart-section" id="chart-section">
+      <div class="chart-section-header">
+        <div class="chart-title">Submission Activity</div>
+        <div class="chart-range-group">
+          <button class="chart-range-btn active" data-days="14">14 days</button>
+          <button class="chart-range-btn" data-days="30">30 days</button>
+        </div>
+      </div>
+      <div class="chart-wrap">
+        <canvas id="submissions-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <h2>Submissions</h2>
+        <div class="filter-group" id="filter-group">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="new">Unread</button>
+          <button class="filter-btn" data-filter="tuition">Tuition</button>
+          <button class="filter-btn" data-filter="academics">Academics</button>
+          <button class="filter-btn" data-filter="scholarship">Scholarship</button>
+          <!-- ── NEW: Archived filter ── -->
+          <button class="filter-btn filter-btn-archived" data-filter="archived">Archived</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="text" id="search-input" placeholder="Search name, email…">
+        </div>
+        <button class="export-btn" id="export-btn">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Subject</th>
+            <th>Grade Level</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="submissions-tbody">
+          <tr>
+            <td colspan="9">
+              <div class="empty-state">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <p>Loading submissions…</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div><!-- /.table-wrap -->
+
+    </div><!-- /#panel-inquiries -->
+
+
+    <!-- ══ SUBSCRIBERS PANEL ══ -->
+    <div id="panel-subscribers" style="display:none">
+
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <h2>Newsletter Subscribers</h2>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <div class="search-box">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" id="sub-search-input" placeholder="Search email…">
+          </div>
+          <button class="export-btn" id="sub-export-btn">
+            <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+            Export CSV
+          </button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Email Address</th>
+              <th>Subscribed On</th>
+              <th>Time</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="subscribers-tbody">
+            <tr><td colspan="5">
+              <div class="empty-state">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <p>Loading subscribers…</p>
+              </div>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div><!-- /#panel-subscribers -->
+
+  </div><!-- /.dash-main -->
+</div><!-- /#dashboard -->
+
+
+<!-- ══════════════════════════════════════════════════════════
+     SUBMISSION DETAIL MODAL
+══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modal-title">—</div>
+        <div class="modal-meta" id="modal-meta">—</div>
+      </div>
+      <button class="modal-close" id="modal-close">
+        <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+      </button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+
+    <!-- ── NEW: Reply panel (collapsed by default) ── -->
+    <div class="reply-panel" id="reply-panel">
+      <div class="reply-panel-label">
+        <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:var(--gold);flex-shrink:0"><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
+        Compose Reply
+      </div>
+      <textarea class="reply-textarea" id="reply-textarea" rows="4" placeholder="Type your reply to this inquiry…"></textarea>
+      <div class="reply-panel-footer">
+        <span class="reply-note">Opens Gmail with your reply pre-filled</span>
+        <button class="modal-btn modal-btn-primary" id="reply-send">
+          Send via Gmail
+        </button>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-primary" id="modal-mark-read">Mark as Read</button>
+      <!-- ── NEW: Archive button ── -->
+      <button class="modal-btn modal-btn-archive" id="modal-archive">Archive</button>
+      <!-- ── NEW: Reply toggle ── -->
+      <button class="modal-btn modal-btn-reply" id="modal-reply-toggle">↩ Reply</button>
+      <button class="modal-btn modal-btn-danger" id="modal-delete">Delete</button>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<!-- Chart.js for analytics -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script>
+'use strict';
+
+/* ══════════════════════════════════════════════════════════
+   FIREBASE CONFIG — Replace with YOUR values from Firebase Console
+   ══════════════════════════════════════════════════════════ */
+const firebaseConfig = {
+  apiKey: "AIzaSyBZ9LeFx7QGZDYNJq7gfDnYtWQ3S7DxuQk",
+  authDomain: "lcs-website-52bdf.firebaseapp.com",
+  projectId: "lcs-website-52bdf",
+  storageBucket: "lcs-website-52bdf.firebasestorage.app",
+  messagingSenderId: "440967467072",
+  appId: "1:440967467072:web:1290825ccb826c1c634fa5"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+/* ══════════════════════════════════════════════════════════
+   ADMIN CREDENTIALS — Change this before deploying!
+   ══════════════════════════════════════════════════════════ */
+const ADMIN_PASS = 'elyeshu@atenulozano';
+
+/* ══════════════════════════════════════════════════════════
+   APP STATE
+   ══════════════════════════════════════════════════════════ */
+let allSubmissions = [];
+let filtered       = [];
+let activeFilter   = 'all';
+let activeModalId  = null;
+let unsubscribe    = null;
+let submissionsChart = null;
+let chartDays      = 14;
+
+/* ══════════════════════════════════════════════════════════
+   DARK MODE
+   ══════════════════════════════════════════════════════════ */
+(function initDarkMode() {
+  const saved = localStorage.getItem('lcs-admin-theme');
+  if (saved === 'dark') applyDark(true);
+})();
+
+function applyDark(on) {
+  document.documentElement.setAttribute('data-theme', on ? 'dark' : 'light');
+  document.getElementById('icon-sun').style.display  = on ? 'block' : 'none';
+  document.getElementById('icon-moon').style.display = on ? 'none'  : 'block';
+}
+
+document.getElementById('dark-toggle').addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  applyDark(!isDark);
+  localStorage.setItem('lcs-admin-theme', isDark ? 'light' : 'dark');
+  if (submissionsChart) renderChart(chartDays);
+});
+
+/* ══════════════════════════════════════════════════════════
+   LOGIN
+   ══════════════════════════════════════════════════════════ */
+document.getElementById('login-btn').addEventListener('click', doLogin);
+document.getElementById('admin-pass').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') doLogin();
+});
+
+function doLogin() {
+  const pass = document.getElementById('admin-pass').value;
+  const err  = document.getElementById('login-error');
+
+  if (pass === ADMIN_PASS) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    err.style.display = 'none';
+    loadSubmissions();
+    loadSubscribers();
+  } else {
+    err.style.display = 'block';
+    document.getElementById('admin-pass').value = '';
+    document.getElementById('admin-pass').focus();
+  }
+}
+
+document.getElementById('logout-btn').addEventListener('click', () => {
+  if (unsubscribe) { unsubscribe(); unsubscribe = null; }
+  if (subUnsubscribe) { subUnsubscribe(); subUnsubscribe = null; }
+  if (submissionsChart) { submissionsChart.destroy(); submissionsChart = null; }
+  allSubscribers = []; filteredSubs = [];
+  document.getElementById('stat-subscribers').textContent = '—';
+  document.getElementById('tab-count-subscribers').textContent = '—';
+  document.getElementById('tab-count-inquiries').textContent = '—';
+  // Reset tabs to inquiries
+  activeTab = 'inquiries';
+  document.querySelectorAll('.page-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === 'inquiries'));
+  document.getElementById('panel-inquiries').style.display = '';
+  document.getElementById('panel-subscribers').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-pass').value = '';
+});
+
+/* ══════════════════════════════════════════════════════════
+   LOAD SUBMISSIONS — Real-time listener from Firestore
+   ══════════════════════════════════════════════════════════ */
+function loadSubmissions() {
+  document.getElementById('submissions-tbody').innerHTML = `
+    <tr><td colspan="9">
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <p>Loading submissions…</p>
+      </div>
+    </td></tr>`;
+
+  unsubscribe = db.collection('inquiries')
+    .orderBy('createdAt', 'desc')
+    .onSnapshot(
+      (snapshot) => {
+        allSubmissions = snapshot.docs.map((doc, i) => {
+          const d = doc.data();
+          return {
+            id:       doc.id,
+            number:   i + 1,
+            read:     d.read     || false,
+            archived: d.archived || false,  // ── NEW
+            data: {
+              'first-name':       d.firstName  || '',
+              'last-name':        d.lastName   || '',
+              email:              d.email      || '',
+              phone:              d.phone      || '',
+              'inquiry-category': d.category   || 'Other',
+              relation:           d.relation   || '',
+              'grade-level':      d.gradeLevel || '',
+              subject:            d.subject    || '',
+              message:            d.message    || '',
+            },
+            created_at: d.createdAt ? d.createdAt.toDate().toISOString() : new Date().toISOString(),
+          };
+        });
+        renderAll();
+      },
+      (err) => {
+        console.error('Firestore error:', err);
+        showEmpty('Could not load submissions. Check your Firebase config.');
+        document.getElementById('setup-notice').style.display = 'flex';
+      }
+    );
+}
+
+/* ══════════════════════════════════════════════════════════
+   RENDER
+   ══════════════════════════════════════════════════════════ */
+function renderAll() {
+  const today = new Date().toDateString();
+  const active = allSubmissions.filter(s => !s.archived);
+  document.getElementById('stat-total').textContent = active.length;
+  document.getElementById('stat-new').textContent   = active.filter(s => !s.read).length;
+  document.getElementById('stat-tuition').textContent =
+    active.filter(s => (s.data['inquiry-category'] || '').toLowerCase().includes('tuition')).length;
+  document.getElementById('stat-today').textContent =
+    active.filter(s => new Date(s.created_at).toDateString() === today).length;
+
+  applyFilter();
+  renderChart(chartDays);
+  // Update inquiries tab count
+  const unread = allSubmissions.filter(s => !s.archived);
+  document.getElementById('tab-count-inquiries').textContent = unread.length;
+}
+
+/* ══════════════════════════════════════════════════════════
+   ANALYTICS CHART  ── NEW
+   ══════════════════════════════════════════════════════════ */
+function renderChart(days) {
+  chartDays = days;
+  const labels = [];
+  const data   = [];
+
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toDateString();
+    labels.push(d.toLocaleDateString('en-PH', { month: 'short', day: 'numeric' }));
+    data.push(allSubmissions.filter(s => !s.archived && new Date(s.created_at).toDateString() === dateStr).length);
+  }
+
+  const isDark   = document.documentElement.getAttribute('data-theme') === 'dark';
+  const textColor = isDark ? 'rgba(255,255,255,0.4)' : '#7a7a98';
+  const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)';
+
+  if (submissionsChart) {
+    submissionsChart.data.labels = labels;
+    submissionsChart.data.datasets[0].data = data;
+    submissionsChart.options.scales.x.ticks.color = textColor;
+    submissionsChart.options.scales.y.ticks.color = textColor;
+    submissionsChart.options.scales.x.grid.color  = gridColor;
+    submissionsChart.options.scales.y.grid.color  = gridColor;
+    submissionsChart.update();
+    return;
+  }
+
+  const ctx = document.getElementById('submissions-chart').getContext('2d');
+  submissionsChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Submissions',
+        data,
+        backgroundColor: 'rgba(201,168,76,0.2)',
+        borderColor:     '#c9a84c',
+        borderWidth:     1.5,
+        borderRadius:    3,
+        hoverBackgroundColor: 'rgba(201,168,76,0.4)',
+      }]
+    },
+    options: {
+      responsive:          true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.parsed.y} submission${ctx.parsed.y !== 1 ? 's' : ''}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          grid:  { color: gridColor },
+          ticks: { color: textColor, font: { family: 'Raleway', size: 11 } }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 1, color: textColor, font: { family: 'Raleway', size: 11 } },
+          grid:  { color: gridColor }
+        }
+      }
+    }
+  });
+}
+
+// Chart range buttons
+document.querySelectorAll('.chart-range-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.chart-range-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderChart(parseInt(btn.dataset.days));
+  });
+});
+
+/* ══════════════════════════════════════════════════════════
+   FILTERS & SEARCH
+   ══════════════════════════════════════════════════════════ */
+document.getElementById('filter-group').addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  activeFilter = btn.dataset.filter;
+  applyFilter();
+});
+
+document.getElementById('search-input').addEventListener('input', applyFilter);
+
+function applyFilter() {
+  const search = (document.getElementById('search-input').value || '').toLowerCase().trim();
+
+  filtered = allSubmissions.filter(s => {
+    const cat = (s.data['inquiry-category'] || '').toLowerCase();
+
+    const matchFilter =
+      activeFilter === 'all'         ? !s.archived :
+      activeFilter === 'new'         ? !s.read && !s.archived :
+      activeFilter === 'tuition'     ? cat.includes('tuition') && !s.archived :
+      activeFilter === 'academics'   ? cat === 'academics' && !s.archived :
+      activeFilter === 'scholarship' ? cat === 'scholarship' && !s.archived :
+      activeFilter === 'archived'    ? s.archived : true;
+
+    const fullName = `${s.data['first-name']} ${s.data['last-name']}`.toLowerCase();
+    const matchSearch = !search ||
+      fullName.includes(search) ||
+      (s.data.email   || '').toLowerCase().includes(search) ||
+      (s.data.subject || '').toLowerCase().includes(search);
+
+    return matchFilter && matchSearch;
+  });
+
+  renderTable();
+}
+
+function renderTable() {
+  const tbody = document.getElementById('submissions-tbody');
+
+  if (!filtered.length) {
+    tbody.innerHTML = `
+      <tr><td colspan="9">
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <p>No submissions found.</p>
+        </div>
+      </td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(s => {
+    const cat     = s.data['inquiry-category'] || 'Other';
+    const catKey  = cat.toLowerCase().replace(/[^a-z]/g, '').replace('tuitionfees','tuition');
+    const date    = new Date(s.created_at);
+    const dateStr = date.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' });
+    const timeStr = date.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit' });
+    const boldRow = s.read ? '' : 'font-weight:600;';
+    const archivedBadge = s.archived ? '<span class="badge badge-archived" style="margin-left:6px">Archived</span>' : '';
+
+    return `
+      <tr data-id="${s.id}" style="${boldRow}">
+        <td>${s.number}</td>
+        <td>
+          <div class="td-name">${esc(s.data['first-name'])} ${esc(s.data['last-name'])}${archivedBadge}</div>
+          <div class="td-email">${esc(s.data.phone || '')}</div>
+        </td>
+        <td><div class="td-email">${s.data.email ? `<a href="https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(s.data.email)}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline dotted;cursor:pointer" onclick="event.stopPropagation()">${esc(s.data.email)}</a>` : '—'}</div></td>
+        <td><span class="badge badge-${catKey}">${esc(cat)}</span></td>
+        <td><div class="td-subject" title="${esc(s.data.subject || '')}">${esc(s.data.subject || '—')}</div></td>
+        <td><div class="td-email">${esc(s.data['grade-level'] || '—')}</div></td>
+        <td class="td-date">${dateStr}<br>${timeStr}</td>
+        <td>
+          <span class="status-dot ${s.read ? 'status-read' : 'status-new'}">
+            ${s.read ? 'Read' : 'New'}
+          </span>
+        </td>
+        <td>
+          <button class="action-btn view-btn" data-id="${s.id}" aria-label="View" title="View">
+            <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          </button>
+        </td>
+      </tr>`;
+  }).join('');
+
+  tbody.querySelectorAll('tr[data-id]').forEach(row => {
+    row.addEventListener('click', () => openModal(row.dataset.id));
+  });
+}
+
+function showEmpty(msg) {
+  document.getElementById('submissions-tbody').innerHTML = `
+    <tr><td colspan="9">
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <p>${msg}</p>
+      </div>
+    </td></tr>`;
+}
+
+/* ══════════════════════════════════════════════════════════
+   MODAL
+   ══════════════════════════════════════════════════════════ */
+function openModal(id) {
+  const s = allSubmissions.find(x => x.id === id);
+  if (!s) return;
+  activeModalId = id;
+
+  // Mark as read in Firestore automatically on open
+  if (!s.read) {
+    db.collection('inquiries').doc(id).update({ read: true });
+  }
+
+  const cat  = s.data['inquiry-category'] || 'Other';
+  const date = new Date(s.created_at).toLocaleString('en-PH', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  });
+
+  document.getElementById('modal-title').textContent =
+    `${s.data['first-name']} ${s.data['last-name']}`;
+  document.getElementById('modal-meta').textContent = `${cat} · ${date}`;
+
+  document.getElementById('modal-body').innerHTML = `
+    <div class="modal-field">
+      <div class="modal-field-label">Subject</div>
+      <div class="modal-field-value">${esc(s.data.subject || '—')}</div>
+    </div>
+    <div class="modal-field" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div>
+        <div class="modal-field-label">Email</div>
+        <div class="modal-field-value"><a href="https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(s.data.email || '')}&su=${encodeURIComponent('Re: ' + (s.data.subject || 'Your Inquiry'))}" target="_blank" rel="noopener">${esc(s.data.email || '—')}</a></div>
+      </div>
+      <div>
+        <div class="modal-field-label">Phone</div>
+        <div class="modal-field-value">${esc(s.data.phone || '—')}</div>
+      </div>
+    </div>
+    <div class="modal-field" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div>
+        <div class="modal-field-label">Relation to Student</div>
+        <div class="modal-field-value">${esc(s.data.relation || '—')}</div>
+      </div>
+      <div>
+        <div class="modal-field-label">Grade / Level of Interest</div>
+        <div class="modal-field-value">${esc(s.data['grade-level'] || '—')}</div>
+      </div>
+    </div>
+    <div class="modal-field">
+      <div class="modal-field-label">Message</div>
+      <div class="modal-field-value" style="white-space:pre-wrap">${esc(s.data.message || '—')}</div>
+    </div>
+  `;
+
+  // Update button labels based on current state
+  document.getElementById('modal-mark-read').textContent = s.read ? 'Mark as Unread' : 'Mark as Read';
+  document.getElementById('modal-archive').textContent   = s.archived ? 'Unarchive' : 'Archive';
+
+  // Reset reply panel
+  document.getElementById('reply-panel').classList.remove('open');
+  document.getElementById('reply-textarea').value = '';
+  // Pre-fill a greeting in the reply box
+  document.getElementById('reply-textarea').value =
+    `Dear ${s.data['first-name']},\n\nThank you for reaching out to Lucban Christian School.\n\n`;
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.classList.add('modal-open');
+}
+
+document.getElementById('modal-close').addEventListener('click', closeModal);
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+});
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.classList.remove('modal-open');
+  activeModalId = null;
+}
+
+// Toggle read / unread
+document.getElementById('modal-mark-read').addEventListener('click', () => {
+  const s = allSubmissions.find(x => x.id === activeModalId);
+  if (s) {
+    db.collection('inquiries').doc(s.id).update({ read: !s.read });
+    closeModal();
+  }
+});
+
+// ── NEW: Archive / Unarchive
+document.getElementById('modal-archive').addEventListener('click', () => {
+  const s = allSubmissions.find(x => x.id === activeModalId);
+  if (!s) return;
+  db.collection('inquiries').doc(s.id).update({ archived: !s.archived });
+  closeModal();
+});
+
+// ── NEW: Reply toggle
+document.getElementById('modal-reply-toggle').addEventListener('click', () => {
+  const panel = document.getElementById('reply-panel');
+  panel.classList.toggle('open');
+  if (panel.classList.contains('open')) {
+    document.getElementById('reply-textarea').focus();
+  }
+});
+
+// ── NEW: Send reply via Gmail
+document.getElementById('reply-send').addEventListener('click', () => {
+  const s = allSubmissions.find(x => x.id === activeModalId);
+  if (!s) return;
+  const body    = document.getElementById('reply-textarea').value;
+  const subject = 'Re: ' + (s.data.subject || 'Your Inquiry at LCS');
+  const url = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(s.data.email || '')}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  window.open(url, '_blank', 'noopener');
+});
+
+// Delete from Firestore
+document.getElementById('modal-delete').addEventListener('click', () => {
+  if (!confirm('Delete this submission? This cannot be undone.')) return;
+  db.collection('inquiries').doc(activeModalId).delete()
+    .catch(err => console.error('Delete failed:', err));
+  closeModal();
+});
+
+/* ══════════════════════════════════════════════════════════
+   EXPORT CSV
+   ══════════════════════════════════════════════════════════ */
+document.getElementById('export-btn').addEventListener('click', () => {
+  const headers = ['#','First Name','Last Name','Email','Phone','Category','Relation','Grade Level','Subject','Message','Date'];
+  const rows = filtered.map(s => [
+    s.number,
+    s.data['first-name'], s.data['last-name'],
+    s.data.email, s.data.phone || '',
+    s.data['inquiry-category'] || '',
+    s.data.relation || '',
+    s.data['grade-level'] || '',
+    s.data.subject || '',
+    (s.data.message || '').replace(/\n/g, ' '),
+    new Date(s.created_at).toLocaleString('en-PH')
+  ]);
+
+  const csv = [headers, ...rows].map(r =>
+    r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')
+  ).join('\n');
+
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+  a.download = `lcs-inquiries-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+});
+
+/* ══════════════════════════════════════════════════════════
+   UTILITY
+   ══════════════════════════════════════════════════════════ */
+function esc(str) {
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ══════════════════════════════════════════════════════════
+   PAGE TABS
+   ══════════════════════════════════════════════════════════ */
+let activeTab = 'inquiries';
+
+document.getElementById('page-tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.page-tab');
+  if (!btn) return;
+  const tab = btn.dataset.tab;
+  if (tab === activeTab) return;
+  activeTab = tab;
+  document.querySelectorAll('.page-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.getElementById('panel-inquiries').style.display  = tab === 'inquiries'   ? '' : 'none';
+  document.getElementById('panel-subscribers').style.display = tab === 'subscribers' ? '' : 'none';
+  if (tab === 'subscribers' && !subUnsubscribe) loadSubscribers();
+});
+
+/* ══════════════════════════════════════════════════════════
+   SUBSCRIBERS — State
+   ══════════════════════════════════════════════════════════ */
+let allSubscribers    = [];
+let filteredSubs      = [];
+let subUnsubscribe    = null;
+
+/* ══════════════════════════════════════════════════════════
+   LOAD SUBSCRIBERS — Real-time listener
+   ══════════════════════════════════════════════════════════ */
+function loadSubscribers() {
+  document.getElementById('subscribers-tbody').innerHTML = `
+    <tr><td colspan="5">
+      <div class="empty-state">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        <p>Loading subscribers…</p>
+      </div>
+    </td></tr>`;
+
+  subUnsubscribe = db.collection('newsletter_subscribers')
+    .orderBy('subscribedAt', 'desc')
+    .onSnapshot(
+      snapshot => {
+        allSubscribers = snapshot.docs.map((doc, i) => {
+          const d = doc.data();
+          return {
+            id:    doc.id,
+            number: i + 1,
+            email: d.email || '',
+            subscribedAt: d.subscribedAt ? d.subscribedAt.toDate().toISOString() : new Date().toISOString(),
+          };
+        });
+        updateSubStats();
+        applySubFilter();
+      },
+      err => {
+        console.error('Subscribers Firestore error:', err);
+        document.getElementById('subscribers-tbody').innerHTML = `
+          <tr><td colspan="5">
+            <div class="empty-state">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+              <p>Could not load subscribers. Check Firebase config.</p>
+            </div>
+          </td></tr>`;
+      }
+    );
+}
+
+function updateSubStats() {
+  const count = allSubscribers.length;
+  document.getElementById('stat-subscribers').textContent = count;
+  document.getElementById('tab-count-subscribers').textContent = count;
+  document.getElementById('tab-count-inquiries').textContent =
+    allSubmissions.filter(s => !s.archived).length;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SUBSCRIBERS — Search & Filter
+   ══════════════════════════════════════════════════════════ */
+document.getElementById('sub-search-input').addEventListener('input', applySubFilter);
+
+function applySubFilter() {
+  const search = (document.getElementById('sub-search-input').value || '').toLowerCase().trim();
+  filteredSubs = allSubscribers.filter(s =>
+    !search || s.email.toLowerCase().includes(search)
+  );
+  renderSubscribersTable();
+}
+
+/* ══════════════════════════════════════════════════════════
+   SUBSCRIBERS — Render Table
+   ══════════════════════════════════════════════════════════ */
+function renderSubscribersTable() {
+  const tbody = document.getElementById('subscribers-tbody');
+
+  if (!filteredSubs.length) {
+    tbody.innerHTML = `
+      <tr><td colspan="5">
+        <div class="empty-state">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <p>No subscribers found.</p>
+        </div>
+      </td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filteredSubs.map(s => {
+    const date    = new Date(s.subscribedAt);
+    const dateStr = date.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' });
+    const timeStr = date.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit' });
+    return `
+      <tr>
+        <td>${s.number}</td>
+        <td>
+          <div class="td-name sub-email-cell">
+            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:var(--gold);flex-shrink:0;margin-top:1px"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <a href="https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(s.email)}"
+               target="_blank" rel="noopener"
+               style="color:inherit;text-decoration:underline dotted"
+               onclick="event.stopPropagation()">${esc(s.email)}</a>
+          </div>
+        </td>
+        <td class="td-date">${dateStr}</td>
+        <td class="td-date">${timeStr}</td>
+        <td>
+          <button class="action-btn sub-delete-btn" data-id="${s.id}" data-email="${esc(s.email)}"
+            aria-label="Delete subscriber" title="Delete">
+            <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+          </button>
+        </td>
+      </tr>`;
+  }).join('');
+
+  tbody.querySelectorAll('.sub-delete-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const email = btn.dataset.email;
+      const id    = btn.dataset.id;
+      if (!confirm(`Remove "${email}" from the newsletter list?`)) return;
+      db.collection('newsletter_subscribers').doc(id).delete()
+        .catch(err => console.error('Delete subscriber failed:', err));
+    });
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   SUBSCRIBERS — Export CSV
+   ══════════════════════════════════════════════════════════ */
+document.getElementById('sub-export-btn').addEventListener('click', () => {
+  const headers = ['#', 'Email', 'Subscribed Date', 'Subscribed Time'];
+  const rows = filteredSubs.map(s => {
+    const date = new Date(s.subscribedAt);
+    return [
+      s.number,
+      s.email,
+      date.toLocaleDateString('en-PH'),
+      date.toLocaleTimeString('en-PH', { hour: '2-digit', minute: '2-digit' }),
+    ];
+  });
+
+  const csv = [headers, ...rows].map(r =>
+    r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')
+  ).join('\n');
+
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+  a.download = `lcs-subscribers-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+});
+
+/* Also load subscribers at login so the stat card updates immediately */
+const _origLoadSubmissions = loadSubmissions;
+
+</script>
+
+
+</body>
+</html>
